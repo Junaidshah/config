@@ -11,8 +11,12 @@
           - docker-ce
           - python-pip
           - git
+          - python3-pip
         state: latest
         update_cache: true
+
+    - name: install bs4
+      command: python3 -m pip install bs4
 
     - name: Install docker pip package
       pip:
