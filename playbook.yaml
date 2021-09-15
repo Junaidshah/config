@@ -33,7 +33,7 @@
       command: docker build -t nginx-local -f /usr/local/dev/config/Dockerfile .
 
     - name: run docker image
-      command: docker run --name nginx-local -p 80:8080 -d nginx-local
-      # would have liked to get the hardening role to work but its just a pain , weird ansible issues. so skipiing this for now
+      command: docker run --name nginx-local -p 80:8080 -d --restart unless-stopped nginx-local
+      # TODO: would have liked to get the hardening role to work leaving this out for lack of time , weird ansible issues.
       #roles:
       # - Ubuntu1804-CIS
