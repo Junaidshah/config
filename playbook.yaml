@@ -1,0 +1,35 @@
+---
+  - name: "install dependencies and configure docker"
+    hosts: localhost
+    connection: local
+    become: true
+    tasks:
+
+    - name: Install a list of packages
+      apt:
+        pkg:
+          - docker-ce
+          - python-pip
+          - git
+        state: latest
+        update_cache: true
+
+    - name: Install docker pip package
+      pip:
+        name: docker-py
+        state: present
+
+    - name: Start and enable docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: build docker image
+      command: docker build -t nginx-local -f /usr/local/dev/config/Dockerfile .
+
+    - name: run docker image
+      command: docker run --name nginx-local -p 80:8080 -d nginx-local
+      # would have liked to get the hardening role to work but its just a pain , weird ansible issues. so skipiing this for now
+      #roles:
+      # - Ubuntu1804-CIS
