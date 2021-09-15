@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from collections import Counter
 
-url = requests.get("http://yahoo.com")
+url = requests.get("http://localhost")
 
 soup = BeautifulSoup(url.content, features="html.parser")
 
